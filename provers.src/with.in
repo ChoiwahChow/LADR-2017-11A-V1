@@ -1,0 +1,64 @@
+clear(auto).
+
+clear(input_sos_first).
+
+list(given_selection).
+
+   % high priority rules
+
+   % *** this the new feature ***
+   % The first 5 input hints are prioritized.
+   % Priority is in input order (highest priority first).
+   part(Hha,high,hint_age,hint & hint_age < 5) = 50.
+
+   part(Hw,high,weight,hint) = 50.
+
+   % low priority rules
+
+   part(TheRest,low,weight,all) = 50.
+
+end_of_list.
+
+formulas(sos).
+
+   % prioritized hints (because of the 5 in the rule above)
+   Q(P01,f(f(f(f(f(f(f(f(f(a)))))))))).
+   Q(P02,f(f(f(f(f(f(f(f(a))))))))).
+   Q(P03,f(f(f(f(f(f(f(a)))))))).
+   Q(P04,f(f(f(f(f(f(a))))))).
+   Q(P05,f(f(f(f(f(a)))))).
+
+   % unprioritized hints (because of the 5 in the rule above)
+   Q(U01,f(f(f(f(a))))).
+   Q(U02,f(f(f(a)))).
+   Q(U03,f(f(a))).
+   Q(U04,f(a)).
+   Q(U05,a).
+
+   R(N01).
+   R(N02).
+   R(N03).
+   R(N04).
+   R(N05).
+
+end_of_list.
+
+formulas(hints).
+
+   % input order is reverse of weight order
+
+   % prioritized hints (because of the 5 in the rule above)
+   Q(P01,f(f(f(f(f(f(f(f(f(a)))))))))).
+   Q(P02,f(f(f(f(f(f(f(f(a))))))))).
+   Q(P03,f(f(f(f(f(f(f(a)))))))).
+   Q(P04,f(f(f(f(f(f(a))))))).
+   Q(P05,f(f(f(f(f(a)))))).
+
+   % unprioritized hints (because of the 5 in the rule above)
+   Q(U01,f(f(f(f(a))))).
+   Q(U02,f(f(f(a)))).
+   Q(U03,f(f(a))).
+   Q(U04,f(a)).
+   Q(U05,a).
+
+end_of_list.

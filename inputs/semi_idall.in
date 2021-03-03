@@ -1,0 +1,9 @@
+
+% n=7, all are idempotent 16,787,079, 317 seconds
+
+
+formulas(idempotent_all).
+
+x * x = x.
+
+end_of_list.

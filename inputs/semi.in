@@ -1,0 +1,11 @@
+
+
+assign(max_models, -1).
+clear(print_models).
+% set(skolems_last).
+
+formulas(assumptions).
+
+(x * y) * z = x * ( y * z).
+
+end_of_list.

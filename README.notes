@@ -1,0 +1,45 @@
+
+
+Running
+
+Start in msearch.c, mace4n():
+	// search(int max_constrained, int depth)
+	rc = search(Max_domain_element_in_input, 0);
+
+It selects a cell to populate the domain element:
+	select_cell(int max_constrained)  
+	
+If Skolems_last is set to true, then skolem cells are treated separately and are put to
+the end of the ordered cells.
+
+
+#define SELECT_LINEAR             0  /* selection orders */
+#define SELECT_CONCENTRIC         1
+#define SELECT_CONCENTRIC_BAND    2    // default
+
+#define NO_MEASURE                0  /* selection measures */
+#define MOST_OCCURRENCES          1
+#define MOST_PROPAGATIONS         2
+#define MOST_CONTRADICTIONS       3
+#define MOST_CROSSED              4    // default
+
+Max_constrained is the maximum constrained domain element (or -1 is none is constrained)
+Constants has max constrained of -1.
+ 
+It starts with max_constrained being Max_domain_element_in_input, and max_constrained will be incremented to the the max index
+of the new cell to make assignment.  The cell will be filled with domain element from 0 to max_constrained + 1.
+
+In recursive call to the next cell, max_constrained is set to max_constrained (max cell index) or max_constrained + 1 (max
+domain element assigned to the cell).
+
+But max_constrained is only used for "SELECT_CONCENTRIC_BAND"
+
+select_cell() considers cell order and selection measure in selecting the next cell to populate.
+
+	Linear: 
+	
+	
+	
+Symbols:
+	-27  is a function such as *
+	-14  is the equality relation  this is always present.

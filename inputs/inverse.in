@@ -1,0 +1,15 @@
+
+
+
+
+assign(max_models, -1).
+% clear(print_models).
+
+formulas(assumptions).
+
+(x * y) * z = x * ( y * z).
+x * (x' * x) = x.
+x' = x' * (x * x').
+
+end_of_list.
+

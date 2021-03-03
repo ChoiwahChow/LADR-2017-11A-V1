@@ -1,0 +1,202 @@
+%
+% Prover9 commands
+%
+
+clear(auto).
+
+op(400,infix,[^,v,"->","=>",*]).
+op(200,prefix,[~,-]).
+
+lex([0,1,*,^,=>,->,v,~,-]).
+
+assign(order,kbo).
+set(lex_order_vars).
+
+set(paramodulation).
+set(para_units_only).
+clear(back_demod).
+set(hyper_resolution).
+
+set(auto_denials).
+%set(restrict_denials).
+
+% **************************************************************************
+% Clauses for Section 3
+% **************************************************************************
+
+formulas(assumptions).
+
+%
+% Identities axiomatising bounded distributive lattices
+%
+
+(x v y) v z = x v (y v z)                 # label("(D1)").
+(x ^ y) ^ z = x ^ (y ^ z)                 # label("(D2)").
+
+x v y = y v x                             # label("(D3)").
+x ^ y = y ^ x                             # label("(D4)").
+
+x v (x ^ y) = x                           # label("(D5)").
+x ^ (x v y) = x                           # label("(D6)").
+
+(x v y) ^ (x v z) = x v (y ^ z)           # label("(D7)").
+(x ^ y) v (x ^ z) = x ^ (y v z)           # label("(D8)").
+
+x v 0 = x                                 # label("(D9)").
+x ^ 1 = x                                 # label("(D10)").
+
+%
+% Identities axiomatising De Morgan algebras
+%
+%    Note: These identities axiomatise De Morgan algebras when taken in
+%    conjunction with the identities axiomatising bounded distributive 
+%    lattices given above.
+%
+
+x ^ 0 = 0                                 # label("(2.1)").
+~x v ~y = ~(x ^ y)                        # label("(DM1)").
+~x ^ ~y = ~(x v y)                        # label("(DM2)").
+~(~x) = x                                 # label("(DN)").
+~1 = 0                                    # label("(2.2)").
+
+%
+% Identities axiomatising Nelson algebras
+% 
+%    Note: These identities axiomatise Nelson algebras when taken in
+%    conjunction with the identities axiomatising De Morgan algebras
+%    given above.
+%
+ 
+(x ^ ~x) ^ (y v ~y) = x ^ ~x              # label("(N1)").
+x -> x = 1                                # label("(N2)").
+(x -> y) ^ (~x v y) = ~x v y              # label("(N3)").
+x ^ (~x v y) = x ^ (x -> y)               # label("(N4)").
+(x -> y) ^ (x -> z) = x -> (y ^ z)        # label("(N5)").
+(x ^ y) -> z = x -> (y -> z)              # label("(N6)").
+-x = x -> 0                               # label("(N7)").
+
+%
+% Definitions mapping Nelson algebras to Nelson FL_ew algebras
+%
+
+% Definition of * (monoid operation) in Nelson algebras
+%    Note: (* def) is equivalent to x * y = ~(x => ~y).
+x * y = ~(x -> ~y) v ~(y -> ~x)           # label("(* def)").
+
+% Definition of => (strong implication) in Nelson algebras
+x => y = (x -> y) ^ (~y -> ~x)            # label("(=> def)").
+
+%
+% Identities known to be satisfied by the variety of Nelson algebras
+%
+
+x -> 1 = 1                                # label("(3.1)").
+1 -> x = x                                # label("(3.2)").
+(x -> y) -> (x -> z) = x -> (y -> z)      # label("(3.3)").
+x -> (y -> z) = y -> (x -> z)             # label("(3.4)").
+x -> (x -> y) = x -> y                    # label("(3.5)").
+(x -> y) ^ (z -> y) = (x v z) -> y        # label("(3.6)").
+x ^ ((x => y) => y) = x                   # label("(3.7)").
+x -> ~(x -> y) = x -> ~y                  # label("(3.8)").
+~(x -> y) -> z = x -> (~y -> z)           # label("(3.9)").
+
+%
+% BCK-algebra identities and quasi-identities known to be
+%    satisfied by the variety of Nelson algebras
+% 
+%    Note:  BCK1, BCK1', BCK5 are not included here.
+%
+
+1 => x = x                                # label("(BCK2)").
+x => 1 = 1                                # label("(BCK3)").
+x => y != 1 | y => x != 1 | x = y         # label("(BCK4)").
+
+end_of_list.
+
+%
+% Current problem (Lemma 3.1)
+%
+
+formulas(assumptions).
+
+% multi-part lemma negated by hand
+
+(A ^ B) -> B != 1                       % (3.10), Lemma 3.1 (1)
+   | (A ^ B) => B != 1                  % (3.11), Lemma 3.1 (2)
+   | ~A => ~B != B => A                 % (3.12), Lemma 3.1 (3)
+   | (A => B) ^ B != B                  % (3.13), Lemma 3.1 (4)
+   | A => (A ^ B) != A => B             % (3.14), Lemma 3.1 (5)
+   # answer("(Lemma 3.1, 5 parts)").
+
+end_of_list.
+
+%
+% Hints extracted from previously found proofs.
+%
+
+formulas(hints).
+
+(x ^ y) -> y = 1           # label("(3.10)"). % Lemma 3.1 (1)
+(x ^ y) => y = 1           # label("(3.11)"). % Lemma 3.1 (2)
+~x => ~y = y => x          # label("(3.12)"). % Lemma 3.1 (3)
+(x => y) ^ y = y           # label("(3.13)"). % Lemma 3.1 (4)
+x => (x ^ y) = x => y      # label("(3.14)"). % Lemma 3.1 (5)
+
+(x -> ~ y) ^ (y -> ~ x) = x => ~ y.
+1 ^ (x -> y) = x -> (x ^ y).
+(x => y) ^ z = (x -> y) ^ ((~ y -> ~ x) ^ z).
+(x -> y) ^ ((~ y -> ~ x) ^ z) = (x => y) ^ z.
+x ^ (y v ~ x) = x ^ (x -> y).
+(~ x -> ~ y) ^ (y -> x) = y => x.
+x v (y ^ x) = x.
+x ^ (y v x) = x.
+(x -> y) ^ (x -> 1) = x -> y.
+x = 1 ^ x.
+1 ^ x = x.
+1 ^ (x -> y) = (y v x) -> y.
+x ^ (y -> x) = (1 v y) -> x.
+1 v x = 1.
+x ^ (y v (z v x)) = x.
+x ^ (y v (x v z)) = x.
+x -> (x ^ y) = x -> y.
+(x -> y) ^ (~ (x ^ y) -> ~ x) = x => (x ^ y).
+x -> x = x -> (x v y).
+x -> (x v y) = x -> x.
+x -> (x ^ (x -> y)) = x -> y.
+x -> (x v y) = 1.
+~ x -> ~ (x ^ y) = 1.
+x -> (y v x) = 1.
+(x ^ y) -> y = 1.
+((x ^ y) -> x) ^ 1 = (x ^ y) => x.
+(x v y) -> x = y -> x.
+~ (x ^ y) -> ~ x = ~ y -> ~ x.
+x ^ (y -> x) = 1 -> x.
+x ^ (y -> x) = x.
+x = (y -> x) ^ x.
+(x -> y) ^ y = y.
+(x -> y) v y = x -> y.
+x -> (y -> x) = 1.
+(x -> (y -> x)) ^ (x -> 1) = 1.
+x ^ (y -> (x v z)) = x.
+(x -> (y -> x)) ^ 1 = 1.
+x -> (x ^ (x -> y)) = x -> (y v ~ x).
+(x -> ~ y) ^ (y -> ~ x) = y => ~ x.
+(x -> (y -> x)) ^ 1 = (x ^ y) => x.
+(x ^ y) => x = 1.
+(x ^ y) => y = 1.
+x -> (y v ~ x) = x -> y.
+x -> (~ x v y) = x -> y.
+~ x ^ (x -> y) = ~ x.
+x ^ (~ x -> y) = ~ ~ x.
+x ^ (~ x -> y) = x.
+x = (~ x -> y) ^ x.
+(~ x -> y) ^ x = x.
+x => ~ y = y => ~ x.
+x => y = ~ y => ~ x.
+~ x => ~ y = y => x.
+(x -> y) ^ y = (x => y) ^ y.
+(x => y) ^ y = y.
+(x -> y) ^ (~ y -> ~ x) = x => (x ^ y).
+x => (x ^ y) = x => y.
+
+end_of_list.

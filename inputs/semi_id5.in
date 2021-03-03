@@ -1,0 +1,27 @@
+
+% for n=7, models = 20,567,930, clock = 491
+
+
+formulas(idempotent5).
+
+
+a0 * a0 = a0.
+a1 * a1 = a1.
+a2 * a2 = a2.
+a3 * a3 = a3.
+a4 * a4 = a4.
+
+a0 != a1.
+a0 != a2.
+a0 != a3.
+a0 != a4.
+a1 != a2.
+a1 != a3.
+a1 != a4.
+a2 != a3.
+a2 != a4.
+a3 != a4.
+
+ x * x = x -> (x = a0 | x = a1 | x = a2 | x = a3 | x = a4).
+
+end_of_list.

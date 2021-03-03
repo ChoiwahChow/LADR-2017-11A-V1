@@ -1,0 +1,12 @@
+
+% for n = 7, 302015216, in 1396 seconds
+
+formulas(idempotent1or2).
+
+
+a * a = a.
+b * b = b.
+
+ x * x = x -> (x = a | x = b).
+
+end_of_list.

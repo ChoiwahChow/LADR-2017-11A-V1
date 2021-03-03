@@ -1,0 +1,15 @@
+
+% for n=7, models = 6,245,418, clock = 96
+
+
+formulas(idempotent2).
+
+
+a0 * a0 = a0.
+a1 * a1 = a1.
+
+a0 != a1.
+
+ x * x = x -> (x = a0 | x = a1).
+
+end_of_list.

@@ -1,0 +1,146 @@
+
+
+(x * y) * z = x * ( y * z).
+a * a = a.
+
+x * x = x -> x = a.
+
+------------------------------
+exactly one idempotent:
+cell 0, max_constrained -1 -> -1  because this is a constant -> max_index is -1.. last = 0.
+cell 5, (1,1), max_constrained 0 -> 1. last = 2
+cell 2, (0,1), max_constrained 1 -> 1. last = 2.
+cell 9, (2,2), max_constrained 1 -> 2. last = 2.
+cell 3, (0,2), max_constrained 2 -> 2. last = 2.
+cell 6, (0,2), max_constrained 2 -> 2. last = 2.
+cell 8, (2,1), max_constrained 2 -> 2. last = 2.
+
+
+(x * y) * z = x * ( y * z).
+a * a = a.
+
+cell 0, max_constrained -1 -> -1  because this is a constant -> max_index is -1.. last = 0.
+cell 5, (1,1), max_constrained 0 -> 1. last = 2
+cell 2, (0,1), max_constrained 1 -> 1. last = 2.
+cell 9, (2,2), max_constrained 1 -> 2. last = 2.
+cell 3, (0,2), max_constrained 2 -> 2. last = 2.
+cell 6, (0,2), max_constrained 2 -> 2. last = 2.
+cell 8, (2,1), max_constrained 2 -> 2. last = 2.
+
+(x * y) * z = x * ( y * z).
+a * a = a.
+b * b = b.
+a != b.
+
+cell 0, max_constrained -1 -> -1  because this is a constant -> max_index is -1.. last = 0.
+cell 1, max_constrained 0 -> 0  because this is a constant -> max_index is -1.. last = 1.
+        the case cell 1 is 0 fails right away because a != b.
+cell 3 (1, 0), max constrained 1 -> 1. last = 2.
+cell 5 (0, 1), max constrained 1 -> 1. last = 2.
+
+=================================================================
+
+
+cell 0, (0) max_constrained -l -> 0. last = 1.
+        This must be in inverse function: o, 1, 2 cells
+cell 3, (0, 0), max_constrained 0 -> 1. last = 1.
+
+
+
+
+
+
+=================================================
+
+assign(max_models, -1).
+clear(print_models).
+set(skolems_last).
+
+formulas(assumptions).
+
+(x * y) * z = x * ( y * z).
+
+exists w (w * w = w).
+end_of_list.
+
+
+For domain size 6.
+
+Current CPU time: 0.00 seconds (total CPU time: 78.56 seconds).
+Ground clauses: seen=217, kept=217.
+Selections=11564423, assignments=42255748, propagations=22861074, current_models=5628898.
+Rewrite_terms=975512195, rewrite_bools=308561292, indexes=33520833.
+Rules_from_neg_clauses=2144045, cross_offs=20840063.
+
+============================== end of statistics =====================
+
+User_CPU=78.56, System_CPU=9.64, Wall_clock=88.
+
+Exiting with 5628898 models.
+
+------ process 467073 exit (all_models) ------
+
+===================================================
+
+
+
+
+assign(max_models, -1).
+clear(print_models).
+set(skolems_last).
+
+formulas(assumptions).
+
+(x * y) * z = x * ( y * z).
+
+exists w (w * w = w).
+a * a = a.
+
+end_of_list.
+
+
+
+============================== STATISTICS ============================
+
+For domain size 6.
+
+Current CPU time: 0.00 seconds (total CPU time: 67.23 seconds).
+Ground clauses: seen=218, kept=218.
+Selections=9688621, assignments=34724820, propagations=19751489, current_models=4680899.
+Rewrite_terms=832086753, rewrite_bools=261853745, indexes=28715816.
+Rules_from_neg_clauses=1792623, cross_offs=17832922.
+
+============================== end of statistics =====================
+
+User_CPU=67.23, System_CPU=8.33, Wall_clock=75.
+
+Exiting with 4680899 models.
+
+------ process 467149 exit (all_models) ------
+
+199445440   3+
+302015216   1 - 2   
+formulas(mace4_clauses).
+(x * y) * z = x * (y * z).
+a * a = a.
+b * b = b.
+x * x != x | a = x | b = x.
+end_of_list.
+formulas(assumptions).
+(x * y) * z = x * (y * z).
+a * a = a.
+b * b = b.
+c * c = c.
+a != b.
+a != c.
+b != c.
+end_of_list.
+
+
+
+
+
+
+
+
+

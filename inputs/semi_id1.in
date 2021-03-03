@@ -1,0 +1,12 @@
+
+% n = 7, exactly 1 idempotent 295,769,798, 1,260 seconds
+
+
+formulas(idempotent1).
+
+
+a * a = a.
+
+ x * x = x -> (x = a).
+
+end_of_list.
