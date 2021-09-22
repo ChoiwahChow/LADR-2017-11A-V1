@@ -616,7 +616,7 @@ BOOL arith_rel_quasi_eval(Term atom)
  *************/
 
 /* DOCUMENTATION
-Return TRUE iff all clauses are true.  There can be arithmeic
+Return TRUE iff all clauses are true.  There can be arithmetic
 terms that need to be evaluated.
 */
 
